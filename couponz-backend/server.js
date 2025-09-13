@@ -5,9 +5,7 @@ const cors = require('cors');
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const { DynamoDBDocumentClient, PutCommand, ScanCommand } = require('@aws-sdk/lib-dynamodb');
 const { v4: uuidv4 } = require('uuid');
-const { MailerSend, EmailParams } = require('mailersend');
-
-
+const { SESClient, SendEmailCommand } = require('@aws-sdk/client-ses');
 
 const app = express();
 const PORT = 5000;
@@ -20,10 +18,8 @@ const client = new DynamoDBClient({ region: 'us-west-1' });
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 const TABLE_NAME = 'Messages'; // replace with your table name
 
-// MailerSend setup
-const mailerSend = new MailerSend({
-  apiKey: process.env.MAILERSEND_API_KEY,
-});
+// SES setup
+const sesClient = new SESClient({ region: 'us-west-1' }); // same region as your verified domain
 
 // Test route
 app.get('/', (req, res) => {
@@ -76,13 +72,7 @@ async function getAllEmails() {
   }
 }
 
-// Send emails to all addresses
-// Send emails to all addresses
-// correct require
-
-// MailerSend setup
-
-
+// Send emails to all addresses via SES
 app.post('/send-emails', async (req, res) => {
   try {
     const emails = await getAllEmails();
@@ -91,15 +81,21 @@ app.post('/send-emails', async (req, res) => {
       return res.json({ success: true, message: 'No emails to send' });
     }
 
+    // Loop through emails and send individually
     await Promise.all(
-      emails.map(email => {
-        const params = new EmailParams()
-          .setFrom({ email: 'admin@test-ywj2lpnwr2mg7oqz.mlsender.net', name: 'Couponz' }) // object with email + name
-          .setTo([{ email}])  // array of objects
-          .setSubject('Heyh!gggggggggggg! fhrom Couponz!')
-          .setHtml('<h3>This is a ttesgt hemail sent using MailerSend API</h3>');
+      emails.map(async (email) => {
+        const params = {
+          Source: process.env.SES_VERIFIED_EMAIL, // verified SES sender email
+          Destination: { ToAddresses: [email] },
+          Message: {
+            Subject: { Data: 'Hello from Couponz!' },
+            Body: {
+              Html: { Data: '<h3>This is a test email sent using Amazon SES</h3>' },
+            },
+          },
+        };
 
-        return mailerSend.email.send(params); // correct send
+        await sesClient.send(new SendEmailCommand(params));
       })
     );
 
@@ -110,10 +106,4 @@ app.post('/send-emails', async (req, res) => {
   }
 });
 
-
-
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+module.exports = app;

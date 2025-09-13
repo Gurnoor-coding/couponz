@@ -15,7 +15,11 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
-    "mailersend": "^2.6.0"
+    "mailersend": "^2.6.0",
+    "aws-serverless-express": "^3.4.0",
+    "@aws-sdk/client-dynamodb": "^3.345.0",
+    "@aws-sdk/lib-dynamodb": "^3.345.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
