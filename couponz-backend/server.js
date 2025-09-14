@@ -80,23 +80,22 @@ async function getAllEmails() {
 
 // Send emails to all addresses via SES
 app.post('/send-emails', async (req, res) => {
+  const { message } = req.body; // get message from frontend
   try {
     const emails = await getAllEmails();
-
     if (emails.length === 0) {
       return res.json({ success: true, message: 'No emails to send' });
     }
 
-    // Loop through emails and send individually
     await Promise.all(
       emails.map(async (email) => {
         const params = {
-          Source: process.env.SES_VERIFIED_EMAIL, // verified SES sender email
+          Source: process.env.SES_VERIFIED_EMAIL,
           Destination: { ToAddresses: [email] },
           Message: {
             Subject: { Data: 'Hello from Couponz!' },
             Body: {
-              Html: { Data: '<h3>This is a test email sent using Amazon SES</h3>' },
+              Html: { Data: `<h3>${message || 'This is a test email sent using Amazon SES'}</h3>` },
             },
           },
         };

@@ -2,11 +2,15 @@ import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
+
+
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
+  const [sendEnabled, setSendEnabled] = useState(false); // step 1
+  const [customMessage, setCustomMessage] = useState(''); // step 2
 
-  const password = "my"; // simple password for now
+  const password = "my";
 
   const handleLogin = () => {
     if (passwordInput === password) {
@@ -32,12 +36,26 @@ function App() {
       ) : (
         <div>
           <Input />
-          <Send />
+          
+          <button onClick={() => setSendEnabled(true)}>Enable Send All</button>
+          {sendEnabled && (<div>
+            <textarea
+              placeholder="Type custom message here..."
+              value={customMessage}
+              onChange={(e) => setCustomMessage(e.target.value)}
+              
+            />
+            <Send customMessage={customMessage}/>
+          </div>)
+          
+          
+          }
         </div>
       )}
     </div>
   );
 }
+
 
 // Function to add emails to backend
 async function add_emails(email){ 
@@ -69,18 +87,23 @@ function Input(){
 }
 
 // Send component
-function Send(){
+
+
+function Send({ customMessage }) {
   const handleSend = async () => {
-    const response = await fetch("https://h3scynmcn9.execute-api.us-west-1.amazonaws.com/send-emails", {
-      method: "POST",
-    });
+    const response = await fetch(
+      "https://h3scynmcn9.execute-api.us-west-1.amazonaws.com/send-emails",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: customMessage }) // pass custom message
+      }
+    );
     const data = await response.json();
     alert(data.message);
   };
 
-  return (
-    <button onClick={handleSend}>Send All Emails</button>
-  );
+  return <button onClick={handleSend}>Send All Emails</button>;
 }
 
 export default App;
