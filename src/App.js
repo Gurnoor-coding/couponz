@@ -71,7 +71,7 @@ function Input(){
 // Send component
 function Send(){
   const handleSend = async () => {
-    const response = await fetch("https://h3scynmcn9.execute-api.us-west-1.amazonaws.com/Couponz2/send-emails", {
+    const response = await fetch("https://h3scynmcn9.execute-api.us-west-1.amazonaws.com", {
       method: "POST",
     });
     const data = await response.json();
