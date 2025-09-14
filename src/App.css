@@ -36,3 +36,74 @@
     transform: rotate(360deg);
   }
 }
+
+/* Full page black background and center content */
+.App-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #000; /* black background */
+  color: #fff; /* default text white */
+  padding: 20px;
+}
+
+/* Title for login page */
+.App-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #00ff00; /* optional green title */
+}
+
+/* Input fields */
+input[type="text"],
+input[type="password"],
+textarea {
+  padding: 10px;
+  margin: 10px 0;
+  width: 300px;
+  border-radius: 8px;
+  border: 1px solid #00ff00; /* green border */
+  background-color: #111;
+  color: #fff;
+  font-size: 16px;
+}
+
+/* All buttons - green theme */
+button {
+  padding: 10px 20px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  background-color: #00ff00;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #00cc00;
+  transform: translateY(-2px);
+}
+
+/* Smaller "Enable Send All" button */
+button.enable-send {
+  padding: 6px 12px;
+  font-size: 14px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/* Textarea for custom message */
+textarea {
+  resize: vertical;
+  min-height: 80px;
+  border: 1px solid #00ff00;
+  background-color: #111;
+  color: #fff;
+}

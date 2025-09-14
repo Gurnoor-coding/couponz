@@ -35,9 +35,11 @@ function App() {
 
 
   return (
+    <div className='App-container'>
     <div>
       {!authenticated ? (
         <div>
+          <div className="App-title">RK Couponz</div>
           <h2>Enter Password to Access</h2>
           <input
             type="password"
@@ -49,17 +51,20 @@ function App() {
         </div>
       ) : (
         <div>
+           <div className="App-title">RK Couponz</div>
           <Input />
           
-          <button onClick={() => setSendEnabled(true)}>Enable Send All</button>
+          <button className="enable-send" onClick={() => setSendEnabled(true)}>Enable Send All</button>
           {sendEnabled && (<div>
+            <div style={{ marginTop: '60px', textAlign: 'center' }}>
             <textarea
               placeholder="Type custom message here..."
               value={customMessage}
               onChange={(e) => setCustomMessage(e.target.value)}
               
             />
-            <Send customMessage={customMessage}/>
+            </div>
+            <Send  customMessage={customMessage}/>
           </div>)
           
           
@@ -67,7 +72,9 @@ function App() {
         </div>
       )}
     </div>
+    </div>
   );
+
 }
 
 
