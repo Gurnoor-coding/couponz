@@ -40,8 +40,8 @@ function App() {
 }
 
 // Function to add emails to backend
-async function add_emails(email){
-  const response = await fetch("https://h3scynmcn9.execute-api.us-west-1.amazonaws.com/emails", {
+async function add_emails(email){ 
+  const response = await fetch("https://h3scynmcn9.execute-api.us-west-1.amazonaws.com/Couponz2/emails", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email }),
@@ -71,7 +71,7 @@ function Input(){
 // Send component
 function Send(){
   const handleSend = async () => {
-    const response = await fetch("https://h3scynmcn9.execute-api.us-west-1.amazonaws.com/send-emails", {
+    const response = await fetch("https://h3scynmcn9.execute-api.us-west-1.amazonaws.com/Couponz2/send-emails", {
       method: "POST",
     });
     const data = await response.json();
