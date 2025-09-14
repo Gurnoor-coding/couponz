@@ -41,7 +41,7 @@ function App() {
 
 // Function to add emails to backend
 async function add_emails(email){ 
-  const response = await fetch("https://h3scynmcn9.execute-api.us-west-1.amazonaws.com/Coupons4/emails", {
+  const response = await fetch("https://h3scynmcn9.execute-api.us-west-1.amazonaws.com/emails", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email }),
