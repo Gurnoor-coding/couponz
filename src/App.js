@@ -10,15 +10,29 @@ function App() {
   const [sendEnabled, setSendEnabled] = useState(false); // step 1
   const [customMessage, setCustomMessage] = useState(''); // step 2
 
-  const password = "my";
+  
 
-  const handleLogin = () => {
-    if (passwordInput === password) {
-      setAuthenticated(true);
+ const handleLogin = async () => {
+  try {
+    const response = await fetch("http://localhost:5000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: passwordInput }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.success) {
+      setAuthenticated(true);   // ✅ same as before
     } else {
-      alert("Wrong password!");
+      alert(data.message || "Wrong password!");
     }
-  };
+  } catch (err) {
+    console.error("Login error:", err);
+    alert("Error connecting to server.");
+  }
+};
+
 
   return (
     <div>
