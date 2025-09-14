@@ -46,41 +46,41 @@
   min-height: 100vh;
   font-family: Arial, sans-serif;
   background-color: #000; /* black background */
-  color: #fff; /* default text white */
-  padding: 20px;
+  color: #fff; 
+  padding: 50px;
 }
 
 /* Title for login page */
 .App-title {
-  font-size: 36px;
+  font-size: 60px; /* even bigger title */
   font-weight: bold;
-  margin-bottom: 20px;
-  color: #00ff00; /* optional green title */
+  margin-bottom: 40px;
+  color: #00ff00;
 }
 
 /* Input fields */
 input[type="text"],
 input[type="password"],
 textarea {
-  padding: 10px;
-  margin: 10px 0;
-  width: 300px;
-  border-radius: 8px;
-  border: 1px solid #00ff00; /* green border */
+  padding: 20px; /* bigger padding */
+  margin: 20px 0;
+  width: 500px; /* wider inputs */
+  border-radius: 12px;
+  border: 2px solid #00ff00;
   background-color: #111;
   color: #fff;
-  font-size: 16px;
+  font-size: 22px; /* bigger text */
 }
 
-/* All buttons - green theme */
+/* All buttons - green theme (main buttons bigger) */
 button {
-  padding: 10px 20px;
-  margin: 10px 0;
+  padding: 18px 36px; /* larger buttons */
+  margin: 14px 0;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   background-color: #00ff00;
   color: #000;
-  font-size: 16px;
+  font-size: 22px; /* bigger text */
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -90,9 +90,9 @@ button:hover {
   transform: translateY(-2px);
 }
 
-/* Smaller "Enable Send All" button */
+/* "Enable Send All" button - smaller and in top-right corner */
 button.enable-send {
-  padding: 6px 12px;
+  padding: 8px 14px;  /* much smaller */
   font-size: 14px;
   position: absolute;
   top: 20px;
@@ -102,8 +102,9 @@ button.enable-send {
 /* Textarea for custom message */
 textarea {
   resize: vertical;
-  min-height: 80px;
-  border: 1px solid #00ff00;
+  min-height: 150px; /* taller textarea */
+  border: 2px solid #00ff00;
   background-color: #111;
   color: #fff;
+  font-size: 22px;
 }
