@@ -18,6 +18,10 @@ const client = new DynamoDBClient({ region: 'us-west-1' });
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 const TABLE_NAME = 'Messages'; // replace with your table name
 
+app.use((req, res, next) => {
+  console.log("Lambda received:", req.method, req.path, req.body);
+  next();
+});
 // SES setup
 const sesClient = new SESClient({ region: 'us-west-1' }); // same region as your verified domain
 

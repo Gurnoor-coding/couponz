@@ -1,9 +1,5 @@
 // backend/lambda.js
-const awsServerlessExpress = require('aws-serverless-express');
-const expressapp = require('./server'); // import your Express app
+const serverlessExpress = require('@vendia/serverless-express');
+const app = require('./server'); // your Express app
 
-const server = awsServerlessExpress.createServer(expressapp);
-
-exports.handler = (event, context) => {
-    awsServerlessExpress.proxy(server, event, context);
-};
+exports.handler = serverlessExpress({ app });
