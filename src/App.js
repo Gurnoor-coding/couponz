@@ -92,14 +92,10 @@ async function add_emails(email){
 }
 
 // Input component
-
-
-// Input component with opt-in checkbox
-function Input() {
+function Input(){
   const [input, setInput] = useState('');
   const [optIn, setOptIn] = useState(false); // new state for opt-in
-
-  const handleSubmit = async () => {
+   const handleSubmit = async () => {
     if (!optIn) {
       alert("You must agree to receive marketing emails to subscribe.");
       return;
@@ -108,17 +104,15 @@ function Input() {
     setInput('');
     setOptIn(false); // reset checkbox
   };
-
   return (
-    <div style={{ marginTop: '20px' }}>
+    <div>
       <input
-        type="email"
-        placeholder="Enter email..."
+        type="text"
+        placeholder='Enter email...'
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        style={{ marginRight: '10px' }}
       />
-      <button onClick={handleSubmit}>Submit</button>
+      <button onClick={async ()=>{add_emails(input); setInput('');}}>Submit</button>
       <div style={{ marginTop: '10px' }}>
         <input
           type="checkbox"
@@ -133,6 +127,9 @@ function Input() {
     </div>
   );
 }
+
+// Input component with opt-in checkbox
+
 
 
 // Send component
