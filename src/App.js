@@ -92,20 +92,48 @@ async function add_emails(email){
 }
 
 // Input component
-function Input(){
+
+
+// Input component with opt-in checkbox
+function Input() {
   const [input, setInput] = useState('');
+  const [optIn, setOptIn] = useState(false); // new state for opt-in
+
+  const handleSubmit = async () => {
+    if (!optIn) {
+      alert("You must agree to receive marketing emails to subscribe.");
+      return;
+    }
+    await add_emails(input);
+    setInput('');
+    setOptIn(false); // reset checkbox
+  };
+
   return (
-    <div>
+    <div style={{ marginTop: '20px' }}>
       <input
-        type="text"
-        placeholder='Enter email...'
+        type="email"
+        placeholder="Enter email..."
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        style={{ marginRight: '10px' }}
       />
-      <button onClick={async ()=>{add_emails(input); setInput('');}}>Submit</button>
+      <button onClick={handleSubmit}>Submit</button>
+      <div style={{ marginTop: '10px' }}>
+        <input
+          type="checkbox"
+          checked={optIn}
+          onChange={(e) => setOptIn(e.target.checked)}
+          id="opt-in-checkbox"
+        />
+        <label htmlFor="opt-in-checkbox" style={{ marginLeft: '5px' }}>
+          I agree to receive marketing emails from Couponz
+        </label>
+      </div>
     </div>
   );
 }
+
 
 // Send component
 

@@ -12,7 +12,6 @@ const PORT = 5000;
 
 
 app.use(cors({ origin: '*' })); 
-
 app.use(express.json());
 
 // DynamoDB setup
@@ -20,16 +19,29 @@ const client = new DynamoDBClient({ region: 'us-west-1' });
 const ddbDocClient = DynamoDBDocumentClient.from(client);
 const TABLE_NAME = 'Messages'; // replace with your table name
 
+
 app.use((req, res, next) => {
   console.log("Lambda received:", req.method, req.path, req.body);
   next();
 });
+
 // SES setup
 const sesClient = new SESClient({ region: 'us-west-1' }); // same region as your verified domain
 
 // Test route
 app.get('/', (req, res) => {
   res.send('Welcome to Couponz backend!');
+});
+// Login route
+app.post('/login', (req, res) => {
+  const { password } = req.body;
+
+  if (password === process.env.LOGIN_PASSWORD) {
+    // In production, you'd return a JWT, but for now just a flag
+    return res.json({ success: true });
+  }
+
+  return res.status(401).json({ success: false, message: 'Wrong password' });
 });
 
 // Add email to database
@@ -48,7 +60,21 @@ app.post('/emails', async (req, res) => {
         Item: { id, mail: email },
       })
     );
+    const params = {
+      Source: process.env.SES_VERIFIED_EMAIL, // e.g., rk@mycouponapp.org
+      Destination: { ToAddresses: [email] },
+      Message: {
+        Subject: { Data: 'Thank you for subscribing!' },
+        Body: {
+          Html: {
+            Data: `<h3>Thank you for subscribing to Couponz!</h3>
+                   <p>You will now receive our latest deals, discounts, and seasonal offers.</p>`,
+          },
+        },
+      },
+    };
 
+    await sesClient.send(new SendEmailCommand(params));
     res.json({ success: true, message: 'Email saved' });
   } catch (err) {
     console.error('Error saving email:', err);
@@ -110,5 +136,6 @@ app.post('/send-emails', async (req, res) => {
     res.status(500).json({ success: false, message: 'Failed to send emails' });
   }
 });
+
 
 module.exports = app;
