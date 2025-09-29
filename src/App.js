@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
-
+import { FaEnvelope, FaPaperPlane, FaUsers } from "react-icons/fa";
 
 
 function App() {
@@ -48,6 +48,7 @@ function App() {
             onChange={(e) => setPasswordInput(e.target.value)}
           />
           <button onClick={handleLogin}>Login</button>
+          <div><ProjectInfo/></div>
         </div>
       ) : (
         <div>
@@ -77,6 +78,26 @@ function App() {
 
 }
 
+
+
+function ProjectInfo() {
+  return (
+    <div className="project-info">
+      <h2>About RK Couponz</h2>
+      <p>
+        RK Couponz helps users subscribe to receive exclusive coupons and
+        marketing emails. Admins can log in to manage lists and send custom
+        announcements.
+      </p>
+      
+      <div className="project-icons">
+        <FaEnvelope size={60} />
+        <FaPaperPlane size={60} />
+        <FaUsers size={60} />
+      </div>
+    </div>
+  );
+}
 
 // Function to add emails to backend
 async function add_emails(email){ 

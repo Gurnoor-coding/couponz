@@ -108,3 +108,11 @@ textarea {
   color: #fff;
   font-size: 22px;
 }
+.project-icons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  color: #444;
+}
+
