@@ -52,7 +52,7 @@ function App() {
         </div>
       ) : (
         <div>
-           <div className="App-title">RK Couponz</div>
+           <div className="App-title">Couponz</div>
           <Input />
           
           <button className="enable-send" onClick={() => setSendEnabled(true)}>Enable Send All</button>
@@ -85,7 +85,7 @@ function ProjectInfo() {
     <div className="project-info">
       <h2>About Couponz</h2>
       <p>
-        RK Couponz helps users subscribe to receive exclusive coupons and
+        Couponz helps users subscribe to receive exclusive coupons and
         marketing emails. Admins can log in to manage lists and send custom
         announcements.
       </p>
