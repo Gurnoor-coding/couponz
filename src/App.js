@@ -39,7 +39,7 @@ function App() {
     <div>
       {!authenticated ? (
         <div>
-          <div className="App-title">RK Couponz</div>
+          <div className="App-title">Couponz</div>
           <h2>Enter Password to Access</h2>
           <input
             type="password"
@@ -83,7 +83,7 @@ function App() {
 function ProjectInfo() {
   return (
     <div className="project-info">
-      <h2>About RK Couponz</h2>
+      <h2>About Couponz</h2>
       <p>
         RK Couponz helps users subscribe to receive exclusive coupons and
         marketing emails. Admins can log in to manage lists and send custom
