@@ -91,8 +91,7 @@ function Login({ onSuccess, notify }) {
         <h2>Admin sign in</h2>
         <p className="muted small">Enter the access password to continue.</p>
 
-        <label className="field">
-          <FiLock className="field-icon" />
+        <label className="field field-plain">
           <input
             type="password"
             placeholder="Password"
