@@ -1,118 +1,257 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #07090b;
+  --surface: #0f1316;
+  --surface-2: #151a1e;
+  --border: #222a30;
+  --text: #e9eef2;
+  --muted: #8a959e;
+  --accent: #22e07a;
+  --accent-hover: #1bc96b;
+  --accent-soft: rgba(34, 224, 122, 0.12);
+  --danger: #ff5c6c;
+  --radius: 16px;
 }
 
-.App-logo {
-  height: 40vmin;
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.bg-glow {
+  position: fixed;
+  inset: -20% -10% auto auto;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(34, 224, 122, 0.18), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+main { position: relative; z-index: 1; }
+
+h1, h2 { margin: 0; letter-spacing: -0.02em; }
+.muted { color: var(--muted); line-height: 1.6; }
+.small { font-size: 14px; margin: 4px 0 0; }
+.accent { color: var(--accent); }
+
+/* ---------- Brand ---------- */
+.brand { display: inline-flex; align-items: center; gap: 12px; }
+.brand-mark {
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #04130a;
+  font-size: 22px;
+  box-shadow: 0 8px 30px rgba(34, 224, 122, 0.35);
+}
+.brand-name { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; }
+.brand-sm .brand-mark { width: 36px; height: 36px; font-size: 18px; border-radius: 10px; }
+.brand-sm .brand-name { font-size: 20px; }
+
+/* ---------- Login ---------- */
+.login {
+  max-width: 1100px;
+  min-height: calc(100vh - 48px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.hero h1 { font-size: clamp(36px, 5vw, 56px); line-height: 1.08; margin: 32px 0 20px; }
+.hero > p { font-size: 17px; max-width: 480px; }
+
+.features { list-style: none; padding: 0; margin: 32px 0 0; display: grid; gap: 14px; }
+.features li { display: flex; align-items: center; gap: 14px; font-weight: 500; }
+.feature-icon {
+  display: grid; place-items: center;
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 18px;
+}
+
+.login-card { max-width: 420px; width: 100%; justify-self: end; }
+.login-card h2 { margin-top: 16px; }
+
+/* ---------- Cards ---------- */
+.card {
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+.card h2 { font-size: 20px; }
+.card-head { display: flex; align-items: flex-start; gap: 14px; }
+.card-head > div:nth-child(2) { flex: 1; }
+.card-icon {
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 20px;
+}
+.card-locked { border-style: dashed; }
+
+/* ---------- Fields ---------- */
+.field { position: relative; display: block; }
+.field-icon {
+  position: absolute; left: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 18px;
   pointer-events: none;
 }
+.field input { padding-left: 46px; }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Full page black background and center content */
-.App-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  background-color: #000; /* black background */
-  color: #fff; 
-  padding: 50px;
-}
-
-/* Title for login page */
-.App-title {
-  font-size: 60px; /* even bigger title */
-  font-weight: bold;
-  margin-bottom: 40px;
-  color: #00ff00;
-}
-
-/* Input fields */
-input[type="text"],
-input[type="password"],
+input[type='email'],
+input[type='password'],
+input[type='text'],
 textarea {
-  padding: 20px; /* bigger padding */
-  margin: 20px 0;
-  width: 500px; /* wider inputs */
+  width: 100%;
+  padding: 14px 16px;
   border-radius: 12px;
-  border: 2px solid #00ff00;
-  background-color: #111;
-  color: #fff;
-  font-size: 22px; /* bigger text */
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 16px;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
-
-/* All buttons - green theme (main buttons bigger) */
-button {
-  padding: 18px 36px; /* larger buttons */
-  margin: 14px 0;
-  border: none;
-  border-radius: 12px;
-  background-color: #00ff00;
-  color: #000;
-  font-size: 22px; /* bigger text */
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
+textarea { min-height: 160px; resize: vertical; line-height: 1.5; }
+::placeholder { color: #5b656d; }
 
-button:hover {
-  background-color: #00cc00;
-  transform: translateY(-2px);
+/* Custom checkbox */
+.checkbox {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; color: var(--muted);
+  cursor: pointer; user-select: none;
 }
-
-/* "Enable Send All" button - smaller and in top-right corner */
-button.enable-send {
-  padding: 8px 14px;  /* much smaller */
+.checkbox input { position: absolute; opacity: 0; pointer-events: none; }
+.checkmark {
+  display: grid; place-items: center;
+  flex-shrink: 0;
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: transparent;
   font-size: 14px;
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  transition: all 0.15s;
+}
+.checkbox input:checked + .checkmark { background: var(--accent); border-color: var(--accent); color: #04130a; }
+.checkbox input:focus-visible + .checkmark { box-shadow: 0 0 0 4px var(--accent-soft); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 22px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  font: inherit; font-weight: 600; font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s, opacity 0.15s, border-color 0.15s;
+}
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn-block { width: 100%; }
+.btn-sm { padding: 8px 12px; font-size: 13px; }
+
+.btn-primary { background: var(--accent); color: #04130a; }
+.btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+
+.btn-outline { background: transparent; color: var(--accent); border-color: var(--accent); }
+.btn-outline:hover { background: var(--accent-soft); }
+
+.btn-ghost { background: transparent; color: var(--muted); border-color: var(--border); }
+.btn-ghost:hover { color: var(--text); background: var(--surface-2); }
+
+.spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(4, 19, 10, 0.3);
+  border-top-color: #04130a;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Dashboard ---------- */
+.dashboard { max-width: 1100px; margin: 0 auto; }
+.topbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.dash-heading { margin: 40px 0 28px; }
+.dash-heading h1 { font-size: 34px; margin-bottom: 6px; }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; align-items: start; }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.badge-live { color: #ffb44c; border-color: rgba(255, 180, 76, 0.4); background: rgba(255, 180, 76, 0.1); }
+
+.locked { display: flex; flex-direction: column; gap: 16px; }
+.row-between { display: flex; justify-content: space-between; align-items: center; margin-top: -6px; }
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+  animation: toast-in 0.25s ease-out;
+}
+.toast-success svg { color: var(--accent); }
+.toast-error svg { color: var(--danger); }
+@keyframes toast-in {
+  from { opacity: 0; transform: translate(-50%, 12px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
 }
 
-/* Textarea for custom message */
-textarea {
-  resize: vertical;
-  min-height: 150px; /* taller textarea */
-  border: 2px solid #00ff00;
-  background-color: #111;
-  color: #fff;
-  font-size: 22px;
-}
-.project-icons {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  color: #444;
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .login { grid-template-columns: 1fr; gap: 40px; padding: 24px 0; }
+  .login-card { justify-self: stretch; max-width: none; }
+  .grid { grid-template-columns: 1fr; }
 }
 
