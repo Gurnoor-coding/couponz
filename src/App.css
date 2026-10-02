@@ -125,6 +125,7 @@ h1, h2 { margin: 0; letter-spacing: -0.02em; }
   pointer-events: none;
 }
 .field input { padding-left: 46px; }
+.field-plain input { padding-left: 16px; }
 
 input[type='email'],
 input[type='password'],
@@ -254,4 +255,3 @@ textarea { min-height: 160px; resize: vertical; line-height: 1.5; }
   .login-card { justify-self: stretch; max-width: none; }
   .grid { grid-template-columns: 1fr; }
 }
-
