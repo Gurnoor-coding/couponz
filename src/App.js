@@ -64,7 +64,7 @@ function Login({ onSuccess, notify }) {
       }
     } catch (err) {
       console.error('Login error:', err);
-      notify('error', 'Could not reach the server');
+      notify('error', 'Invalid Password');
     } finally {
       setLoading(false);
     }
@@ -220,7 +220,7 @@ function Broadcast({ notify }) {
       if (res.ok) setMessage('');
     } catch (err) {
       console.error(err);
-      notify('error', 'Could not reach the server');
+      notify('error', 'Invalid Password');
     } finally {
       setLoading(false);
     }
